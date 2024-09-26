@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Style/text_style.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -8,32 +10,42 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Fz Poppins', // Sử dụng font Poppins cho toàn bộ ứng dụng
+        fontFamily: 'Fz Poppins',
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Sử dụng font Poppins'),
-        ),
-        body: const Center(
+      home: const Scaffold(
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Văn bản Regular',
-                style: TextStyle(fontWeight: FontWeight.w400), // Regular (400)
-              ),
-              Text(
-                'Văn bản Bold',
-                style: TextStyle(fontWeight: FontWeight.w700), // Bold (700)
-              ),
-              Text(
-                'Văn bản Italic',
-                style: TextStyle(fontStyle: FontStyle.italic), // Italic
-              ),
-              Text(
-                'Văn bản Black Italic',
-                style: TextStyle(fontWeight: FontWeight.w900, fontStyle: FontStyle.italic), // Black Italic (900)
+                'Heading 1',
+                style: AppTextStyles.heading1, // Regular (400)
+              ),Text(
+                'Heading 2',
+                style: AppTextStyles.heading2, // Regular (400)
+              ),Text(
+                'Heading 3',
+                style: AppTextStyles.heading3, // Regular (400)
+              ),Text(
+                'Heading 4',
+                style: AppTextStyles.heading4, // Regular (400)
+              ),Text(
+                'Subtitle',
+                style: AppTextStyles.subtitle, // Regular (400)
+              ),Text(
+                'Lable',
+                style: AppTextStyles.label, // Regular (400)
+              ),Text(
+                'Sub body',
+                style: AppTextStyles.subBody, // Regular (400)
+              ),Text(
+                'Body',
+                style: AppTextStyles.body, // Regular (400)
+              ),Text(
+                'caption',
+                style: AppTextStyles.caption, // Regular (400)
               ),
             ],
           ),
