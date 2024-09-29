@@ -1,54 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+
+import 'Style/app_colors.dart';
+import 'Style/provider.dart';
 import 'Style/text_style.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Fz Poppins',
+      theme: themeProvider.currentTheme,
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Theme Toggle App'),
       ),
-      home: const Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Heading 1',
-                style: AppTextStyles.heading1, // Regular (400)
-              ),Text(
-                'Heading 2',
-                style: AppTextStyles.heading2, // Regular (400)
-              ),Text(
-                'Heading 3',
-                style: AppTextStyles.heading3, // Regular (400)
-              ),Text(
-                'Heading 4',
-                style: AppTextStyles.heading4, // Regular (400)
-              ),Text(
-                'Subtitle',
-                style: AppTextStyles.subtitle, // Regular (400)
-              ),Text(
-                'Lable',
-                style: AppTextStyles.label, // Regular (400)
-              ),Text(
-                'Sub body',
-                style: AppTextStyles.subBody, // Regular (400)
-              ),Text(
-                'Body',
-                style: AppTextStyles.body, // Regular (400)
-              ),Text(
-                'caption',
-                style: AppTextStyles.caption, // Regular (400)
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Dòng text
+            Text(
+              'Chế độ hiện tại: ${themeProvider.isDarkMode ? 'Tối' : 'Sáng'}',
+              style: AppTextStyles.heading2,
+            ),
+            SizedBox(height: 20),
+            // Nút chuyển đổi theme
+            ElevatedButton(
+              onPressed: () {
+                themeProvider.toggleTheme();
+              },
+              child: Text('Chuyển đổi chế độ'),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: themeProvider.isDarkMode
+                    ? DarkModeColors.primaryText
+                    : LightModeColors.primaryText,
+                backgroundColor: themeProvider.isDarkMode
+                    ? DarkModeColors.primary
+                    : LightModeColors.primary,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
